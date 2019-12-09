@@ -1,0 +1,41 @@
+<resources>
+  <string name="app_name">EEG Car</string>
+  <string name="connect">connect</string>
+  <string name="disconnect">disconnect</string>
+  <string name="stop_monitoring">stop monitoring</string>
+  <string name="start_monitoring">start monitoring</string>
+  <string name="waiting_for_raw_signal">waiting for raw signal...</string>
+  <string name="waiting_for_blink_signal">waiting for blink signal...</string>
+  <string name="waiting_for_meditation_signal">waiting for meditation signal...</string>
+  <string name="waiting_for_attention_signal">waiting for attention signal&#8230;</string>
+  <string name="waiting_for_state">waiting for state...</string>
+  <string name="neg1">-1</string>
+  <string name="connectingMWM">Connecting to MWM&#8230;</string>
+  <string name="connectingCar">Connecting to Car&#8230;</string>
+  <string name="blueUnav">Bluetooth device not available.</string>
+  <string name="noPaired">No paired device found.</string>
+  <string name="selectDev">Select a device:</string>
+  <string name="notCon">Not connected</string>
+  <string name="conFailed">Connection Failed.</string>
+  <string name="conOK">Connected!</string>
+  <string name="ok">Okay</string>
+  <string name="cancel">Cancel</string>
+  <string name="notConnMsg">Device is not connected.</string>
+  <string name="errOccered">An error has been occurred.</string>
+  <string name="connected">Connected! Tap to disconnect.</string>
+  <string name="blueNotOnPromt">Bluetooth is off. Turn it on?</string>
+  <string name="blueNotOn">Bluetooth is off.</string>
+  <string name="turnOn">Turn On</string>
+  <string name="selectCar">Select the Car</string>
+  <string name="selectEEG">Select the EEG</string>
+  <string name="connectMWM">Connect MWM</string>
+  <string name="connectCar">Connect Car</string>
+  <string name="mwmNotConnectedHint">MWM is not connected.\nTap the button above to connect.</string>
+  <string name="carNotConnectedHint">Car is not connected.\nTap the button above to connect.</string>
+  <string name="mwmConnectedHint">MWM is connected successfully.\nTap the button above to disconnect.</string>
+  <string name="carConnectedHint">Car is connected successfully.\nTap the button above to disconnect.</string>
+  <string name="mwmNotFound">MWM can not be found.\nMake sure the device is turned on then try again.</string>
+  <string name="mwmNotPairedHint">MWM is not paired with this device.\nPlease pair/re-pair and try again.</string>
+  <string name="carNotConnMsg">Car is not connected! Unable to send command.</string>
+
+</resources>
