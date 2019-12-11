@@ -11,23 +11,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92804a81-d821-415d-a5f4-215fc27b2683" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle____local_aars____home_ibrahim_Individual_Git_Projects_EEG_Car_2_library_libs_ThinkGear_jar_unspecified_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/CarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/CarController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/library.iml" beforeDir="false" afterPath="$PROJECT_DIR$/library/library.iml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +36,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="5200aff2f4a674cb" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus5x28" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -53,30 +51,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="178" column="42" selection-start-line="178" selection-start-column="42" selection-end-line="178" selection-end-column="42" />
+            <state relative-caret-position="267">
+              <caret line="118" column="43" selection-start-line="118" selection-start-column="38" selection-end-line="118" selection-end-column="43" />
               <folding>
-                <element signature="e#4661#4869#0" expanded="true" />
-                <element signature="e#4868#4869#0" expanded="true" />
-                <element signature="e#5819#6227#0" expanded="true" />
-                <element signature="e#6226#6227#0" expanded="true" />
-                <element signature="method#showBTAlert#0;class#MainActivity#0" />
-                <element signature="method#showBTSelect#0;class#MainActivity#0" />
-                <element signature="method#connectBluetooth#0;class#MainActivity#0" />
-                <element signature="method#onPreExecute#0;class#ConnectBT#0;class#MainActivity#0" />
+                <element signature="e#6199#6394#0" expanded="true" />
+                <element signature="e#6393#6394#0" expanded="true" />
+                <element signature="e#8832#8833#0" expanded="true" />
+                <element signature="e#8862#8863#0" expanded="true" />
+                <element signature="e#12023#12257#0" />
+                <element signature="e#12263#12562#0" />
+                <element signature="e#12568#13435#0" />
+                <element signature="e#13441#14334#0" />
+                <element signature="e#14340#14490#0" />
+                <element signature="e#14496#14672#0" />
+                <element signature="e#14678#16433#0" />
+                <element signature="e#14873#15062#0" />
+                <element signature="e#15072#15723#0" />
+                <element signature="e#15733#16427#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/CarController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="116" column="8" selection-start-line="116" selection-start-column="8" selection-end-line="118" selection-end-column="38" />
+            <state relative-caret-position="177">
+              <caret line="146" column="54" selection-start-line="146" selection-start-column="42" selection-end-line="146" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -88,10 +92,10 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="492">
-              <caret line="102" column="8" selection-start-line="102" selection-start-column="8" selection-end-line="102" selection-end-column="8" />
+            <state relative-caret-position="383">
+              <caret line="180" column="37" selection-start-line="180" selection-start-column="37" selection-end-line="180" selection-end-column="37" />
               <folding>
-                <element signature="e#3529#3547#0" expanded="true" />
+                <element signature="e#5095#5113#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,7 +126,6 @@
       <find>onre</find>
       <find>onstat</find>
       <find>bluetooth</find>
-      <find>sends</find>
       <find>bluetooths</find>
       <find>STOP</find>
       <find>sendC</find>
@@ -132,6 +135,18 @@
       <find>intent</find>
       <find>bluetoothso</find>
       <find>distance</find>
+      <find>set</find>
+      <find>update</find>
+      <find>currentP</find>
+      <find>STATE_IDLE</find>
+      <find>sleep</find>
+      <find>carcon</find>
+      <find>regist</find>
+      <find>sends</find>
+      <find>currentS</find>
+      <find>tat</find>
+      <find>CurrentState</find>
+      <find>setCu</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -152,10 +167,10 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/bt_select_dialog_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/CarControler.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/CarController.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/CarController.java" />
       </list>
     </option>
   </component>
@@ -302,7 +317,7 @@
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" weight="0.32840723" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32840723" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.32512316" />
-      <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Android Profiler" order="8" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
@@ -343,12 +358,12 @@
     <entry file="file://$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/github/pwittchen/neurosky/app/BuildConfig.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main_bak.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="65" selection-start-line="5" selection-start-column="65" selection-end-line="5" selection-end-column="65" />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="jar://$PROJECT_DIR$/library/libs/ThinkGear.jar!/com/neurosky/thinkgear/TGDevice.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -413,13 +428,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -430,16 +438,6 @@
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/CarController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="116" column="8" selection-start-line="116" selection-start-column="8" selection-end-line="118" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.installs/AndroidStudio/Sdk/sources/android-28/java/lang/Runnable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="463">
@@ -447,30 +445,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="102" column="8" selection-start-line="102" selection-start-column="8" selection-end-line="102" selection-end-column="8" />
+        <state relative-caret-position="383">
+          <caret line="180" column="37" selection-start-line="180" selection-start-column="37" selection-end-line="180" selection-end-column="37" />
           <folding>
-            <element signature="e#3529#3547#0" expanded="true" />
+            <element signature="e#5095#5113#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="178" column="42" selection-start-line="178" selection-start-column="42" selection-end-line="178" selection-end-column="42" />
+        <state relative-caret-position="267">
+          <caret line="118" column="43" selection-start-line="118" selection-start-column="38" selection-end-line="118" selection-end-column="43" />
           <folding>
-            <element signature="e#4661#4869#0" expanded="true" />
-            <element signature="e#4868#4869#0" expanded="true" />
-            <element signature="e#5819#6227#0" expanded="true" />
-            <element signature="e#6226#6227#0" expanded="true" />
-            <element signature="method#showBTAlert#0;class#MainActivity#0" />
-            <element signature="method#showBTSelect#0;class#MainActivity#0" />
-            <element signature="method#connectBluetooth#0;class#MainActivity#0" />
-            <element signature="method#onPreExecute#0;class#ConnectBT#0;class#MainActivity#0" />
+            <element signature="e#6199#6394#0" expanded="true" />
+            <element signature="e#6393#6394#0" expanded="true" />
+            <element signature="e#8832#8833#0" expanded="true" />
+            <element signature="e#8862#8863#0" expanded="true" />
+            <element signature="e#12023#12257#0" />
+            <element signature="e#12263#12562#0" />
+            <element signature="e#12568#13435#0" />
+            <element signature="e#13441#14334#0" />
+            <element signature="e#14340#14490#0" />
+            <element signature="e#14496#14672#0" />
+            <element signature="e#14678#16433#0" />
+            <element signature="e#14873#15062#0" />
+            <element signature="e#15072#15723#0" />
+            <element signature="e#15733#16427#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/CarController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="146" column="54" selection-start-line="146" selection-start-column="42" selection-end-line="146" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

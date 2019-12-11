@@ -70,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.imgLeft) ImageView imgLeft;
     @BindView(R.id.imgRight) ImageView imgRight;
     @BindView(R.id.distance) TextView distance;
+    @BindView(R.id.timer) TextView timer;
+
+    @BindView(R.id.testBlink) Button testBlink;
 
 
     private static final int HC05 = 0;
@@ -112,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
             while (true){
                 try {
                     if(btInput!=null && btInput.available()>0){
+                        sendSignalToCar("S"); //stopping the car
+                        carController.setCurrentState(CarController.STATE_IDLE);
                         sleep(5); //slow BT connection
                         byte[] bytes = new byte[btInput.available()];
                         btInput.read(bytes);
@@ -135,9 +140,11 @@ public class MainActivity extends AppCompatActivity {
             public void onReceive(Context context, Intent intent) {
                 int uiCode = intent.getIntExtra("arrows",CarController.BLANK);
                 if(uiCode == CarController.STATE_IDLE){
+                    timer.setVisibility(View.GONE);
                     setArrowsVisibility(View.VISIBLE);
                     return;
                 }
+                timer.setVisibility(View.VISIBLE);
                 setArrowsVisibility(View.INVISIBLE);
                 switch (uiCode){
                     case CarController.FORWARD:
@@ -153,6 +160,13 @@ public class MainActivity extends AppCompatActivity {
                         imgRight.setVisibility(View.VISIBLE);
                         break;
                 }
+            }
+        };
+
+        BroadcastReceiver brTimer = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                timer.setText(intent.getStringExtra("leftTime"));
             }
         };
 
@@ -181,7 +195,8 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        registerReceiver(brArrow,new IntentFilter("updateUI"));
+        registerReceiver(brTimer,new IntentFilter("updateTimer"));
+        registerReceiver(brArrow,new IntentFilter("updateArrows"));
         registerReceiver(brCar,new IntentFilter("sendToCar"));
         registerReceiver(btProximity,new IntentFilter("proximity"));
     }
@@ -218,6 +233,13 @@ public class MainActivity extends AppCompatActivity {
             d(LOG_TAG, e.getMessage());
         }
     }
+
+
+
+    @OnClick(R.id.testBlink) void onTestBlink(){
+        carController.registerBlink(100);
+    }
+
 
     private void setArrowsVisibility(int visibility) {
         imgBackward.setVisibility(visibility);
@@ -396,7 +418,7 @@ public class MainActivity extends AppCompatActivity {
         new ConnectBT().execute();
     }
 
-    private static void sleep(int ms){
+    public static void sleep(int ms){
         try {
             Thread.sleep(ms);
         } catch (InterruptedException e) {

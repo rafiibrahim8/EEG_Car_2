@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import static ml.nerdsofku.eegcarx2.MainActivity.sleep;
 
 public class CarController {
     public static final int FORWARD = 1;
@@ -23,6 +24,9 @@ public class CarController {
     public static final int STATE_CIRCLING_ARROWS = 101;
     public static final int STATE_FIXED_ON_DIRECTION = 102;
     public static final int STATE_RUNNING = 103;
+
+    public static final int TIMER_PREC_MS = 100;
+    public static final int THREAD_RELAX_TIME = 1;
 
     private Context context;
     private long lastBlinkTime;
@@ -61,6 +65,10 @@ public class CarController {
 
     public void setCarConnected(boolean carConnected) {
         isCarConnected = carConnected;
+    }
+    public void setCurrentState(int state){
+        currentState = state;
+        updateArrow(state);
     }
 
     private void sendCommandToCar(int currentPointedDirection) {
@@ -106,42 +114,56 @@ public class CarController {
                 break;
             case STATE_RUNNING:
                 currentState = STATE_IDLE;
+                currentPointedDirection.set(BLANK);
                 sendCommandToCar(STOP);
             case STATE_FIXED_ON_DIRECTION:
                 currentState = STATE_RUNNING;
                 sendCommandToCar(currentPointedDirection.get());
+                break;
         }
     }
 
-    private void updateUI(int dir){
-        Intent intent = new Intent("updateUI");
+    private void updateArrow(int dir){
+        Intent intent = new Intent("updateArrows");
         intent.putExtra("arrows",dir);
         context.sendBroadcast(intent);
     }
 
+    private void updateTimer(float left){
+        Intent intent = new Intent("updateTimer");
+        intent.putExtra("leftTime",left+"");
+        context.sendBroadcast(intent);
+    }
     private void startThread() {
+
         new Thread(()->{
             while (true){
                 if(currentState == STATE_CIRCLING_ARROWS){
                     currentPointedDirection.addAndGet(1);
                     if(currentPointedDirection.get()>RIGHT)
                         currentPointedDirection.set(FORWARD);
-                    updateUI(currentPointedDirection.get());
-                    try{ Thread.sleep(DIRECTION_HOLD_MS); } catch (Exception ex){}
-
+                    updateArrow(currentPointedDirection.get());
+                    int timeLeft = (int) DIRECTION_HOLD_MS;
+                    int beforeLoopState = currentState;
+                    while(timeLeft>0 && currentState==beforeLoopState){
+                        sleep(TIMER_PREC_MS-THREAD_RELAX_TIME);
+                        timeLeft-=TIMER_PREC_MS;
+                        updateTimer((float)timeLeft/1000);
+                    }
                 }
+
                 else if(currentState == STATE_RUNNING){
-                    updateUI(currentPointedDirection.get());
+                    updateArrow(currentPointedDirection.get());
                     try{ Thread.sleep(ARROW_BLINK_TIME); } catch (Exception ex){}
-                    updateUI(BLANK);
+                    updateArrow(BLANK);
                     try{ Thread.sleep(ARROW_BLINK_TIME); } catch (Exception ex){}
                 }
                 else if(currentState ==STATE_IDLE){
-                    updateUI(STATE_IDLE);
+                    updateArrow(STATE_IDLE);
                 }
 
 
-                try{ Thread.sleep(1); } catch (Exception ex){}
+                try{ Thread.sleep(THREAD_RELAX_TIME); } catch (Exception ex){}
             }
         }).start();
     }
