@@ -12,7 +12,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,6 +38,7 @@ import com.github.pwittchen.neurosky.library.message.enums.Signal;
 import com.github.pwittchen.neurosky.library.message.enums.State;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
@@ -65,11 +69,14 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.imgUP) ImageView imgForward;
     @BindView(R.id.imgLeft) ImageView imgLeft;
     @BindView(R.id.imgRight) ImageView imgRight;
+    @BindView(R.id.distance) TextView distance;
 
 
     private static final int HC05 = 0;
     private static final int NSMW2 = 1;
+    private Vibrator vibrator;
     private BluetoothAdapter bluetoothAdapter;
+    private InputStream btInput;
     private String[] btDevices;
     private String remoteAddr,remoteName;
     private BluetoothSocket bluetoothSocket;
@@ -87,14 +94,39 @@ public class MainActivity extends AppCompatActivity {
         isConnected = new boolean[]{false,false};
 
         signalLayout.setVisibility(View.GONE);
-
+        distance.setVisibility(View.INVISIBLE);
+        btInput = null;
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if(bluetoothAdapter == null){
             Toast.makeText(this,R.string.blueUnav,Toast.LENGTH_LONG).show();
             return;
         }
         doBluetoothStuffs();
+        initBTReceiver();
         registerBroadcasts();
+    }
+
+    private void initBTReceiver() {
+        new Thread(()->{
+            while (true){
+                try {
+                    if(btInput!=null && btInput.available()>0){
+                        sleep(5); //slow BT connection
+                        byte[] bytes = new byte[btInput.available()];
+                        btInput.read(bytes);
+                        Intent intent = new Intent("proximity");
+                        intent.putExtra("distance",new String(bytes));
+                        this.sendBroadcast(intent);
+                        sleep(1000);
+                        intent.putExtra("distance","");
+                        this.sendBroadcast(intent);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     private void registerBroadcasts() {
@@ -131,8 +163,27 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        BroadcastReceiver btProximity = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String distanceFromCar = intent.getStringExtra("distance");
+                if(distanceFromCar.isEmpty()){
+                    distance.setVisibility(View.INVISIBLE);
+                }
+                distance.setVisibility(View.VISIBLE);
+                distance.setText(distanceFromCar);
+                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+                    vibrator.vibrate(VibrationEffect.createOneShot(500,VibrationEffect.DEFAULT_AMPLITUDE));
+                }
+                else{
+                    vibrator.vibrate(500);
+                }
+            }
+        };
+
         registerReceiver(brArrow,new IntentFilter("updateUI"));
         registerReceiver(brCar,new IntentFilter("sendToCar"));
+        registerReceiver(btProximity,new IntentFilter("proximity"));
     }
 
     @OnClick(R.id.btnConnectCar0) void onBtnCarClick(){
@@ -345,6 +396,14 @@ public class MainActivity extends AppCompatActivity {
         new ConnectBT().execute();
     }
 
+    private static void sleep(int ms){
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            d("ERROR","Thread Sleep");
+        }
+    }
+
     //this class is for connecting HC-05 only
     private class ConnectBT extends AsyncTask<Void,Void,Void> {
 
@@ -365,6 +424,7 @@ public class MainActivity extends AppCompatActivity {
                     bluetoothSocket = remoteDev.createInsecureRfcommSocketToServiceRecord(uuid);
                     //bluetoothAdapter.cancelDiscovery();
                     bluetoothSocket.connect();
+                    btInput = bluetoothSocket.getInputStream();
                 }catch (Exception ex){
                     success = false;
                 }
