@@ -91,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.timer)
     TextView timer;
 
+    @BindView(R.id.testBlink)
+    Button testBlink;
 
 
     private static final int HC05 = 0;
@@ -280,6 +282,12 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             d(LOG_TAG, e.getMessage());
         }
+    }
+
+
+    @OnClick(R.id.testBlink)
+    void onTestBlink() {
+        carController.registerBlink(100);
     }
 
 
