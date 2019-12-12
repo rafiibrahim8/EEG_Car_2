@@ -12,7 +12,8 @@ public class CarController {
     public static final int LEFT = 3;
     public static final int RIGHT = 4;
     public static final int STOP = -1;
-    public static final int BLANK = 0;
+    public static final int NONE = 0;
+    public static final int ALL = 15;
 
     public static final long DIRECTION_HOLD_MS = 2000;
     public static final long ARROW_BLINK_TIME = 250;
@@ -39,7 +40,7 @@ public class CarController {
 
     public CarController(Context contex){
         lastBlinkTime = System.currentTimeMillis()-10000;//10000 for safety
-        currentPointedDirection = new AtomicInteger(BLANK);
+        currentPointedDirection = new AtomicInteger(NONE);
         currentState = STATE_IDLE;
         latBlinkStrength = 0;
         lastAttention = 0;
@@ -68,7 +69,7 @@ public class CarController {
     }
     public void setCurrentState(int state){
         currentState = state;
-        updateArrow(state);
+        updateStateUI(state);
     }
 
     private void sendCommandToCar(int currentPointedDirection) {
@@ -96,10 +97,14 @@ public class CarController {
     }
 
     public void registerBlink(int strength){
-        this.lastBlinkDifference = lastBlinkTime - System.currentTimeMillis();
+        this.lastBlinkDifference = System.currentTimeMillis() - lastBlinkTime;
         this.lastBlinkTime = System.currentTimeMillis();
         this.latBlinkStrength = strength;
         onBlinkRegister();
+    }
+
+    public int getCurrentState() {
+        return currentState;
     }
 
     private void onBlinkRegister() {
@@ -107,33 +112,45 @@ public class CarController {
             case STATE_IDLE:
                 if(latBlinkStrength>=BLINK_THRESHOLD)
                     currentState = STATE_CIRCLING_ARROWS;
+                updateStateUI(currentState);
                 break;
             case STATE_CIRCLING_ARROWS:
                 if(lastBlinkDifference<=DOUBLE_BLINK_THRESHOLD_MS)
                     currentState=STATE_FIXED_ON_DIRECTION;
+                updateStateUI(currentState);
                 break;
             case STATE_RUNNING:
                 currentState = STATE_IDLE;
-                currentPointedDirection.set(BLANK);
+                updateStateUI(currentState);
+                currentPointedDirection.set(NONE);
                 sendCommandToCar(STOP);
+                break;
             case STATE_FIXED_ON_DIRECTION:
                 currentState = STATE_RUNNING;
+                updateStateUI(currentState);
                 sendCommandToCar(currentPointedDirection.get());
                 break;
         }
     }
 
-    private void updateArrow(int dir){
+    private void updateArrowUI(int dir){
         Intent intent = new Intent("updateArrows");
         intent.putExtra("arrows",dir);
         context.sendBroadcast(intent);
     }
 
-    private void updateTimer(float left){
+    private void updateTimerUI(float left){
         Intent intent = new Intent("updateTimer");
-        intent.putExtra("leftTime",left+"");
+        intent.putExtra("leftTime","Arrow will change in "+left+"s");
         context.sendBroadcast(intent);
     }
+
+    private void updateStateUI(int state){
+        Intent intent = new Intent("updateState");
+        intent.putExtra("state",state);
+        context.sendBroadcast(intent);
+    }
+
     private void startThread() {
 
         new Thread(()->{
@@ -142,24 +159,24 @@ public class CarController {
                     currentPointedDirection.addAndGet(1);
                     if(currentPointedDirection.get()>RIGHT)
                         currentPointedDirection.set(FORWARD);
-                    updateArrow(currentPointedDirection.get());
+                    updateArrowUI(currentPointedDirection.get());
                     int timeLeft = (int) DIRECTION_HOLD_MS;
                     int beforeLoopState = currentState;
                     while(timeLeft>0 && currentState==beforeLoopState){
                         sleep(TIMER_PREC_MS-THREAD_RELAX_TIME);
                         timeLeft-=TIMER_PREC_MS;
-                        updateTimer((float)timeLeft/1000);
+                        updateTimerUI((float)timeLeft/1000);
                     }
                 }
 
                 else if(currentState == STATE_RUNNING){
-                    updateArrow(currentPointedDirection.get());
+                    updateArrowUI(currentPointedDirection.get());
                     try{ Thread.sleep(ARROW_BLINK_TIME); } catch (Exception ex){}
-                    updateArrow(BLANK);
+                    updateArrowUI(NONE);
                     try{ Thread.sleep(ARROW_BLINK_TIME); } catch (Exception ex){}
                 }
                 else if(currentState ==STATE_IDLE){
-                    updateArrow(STATE_IDLE);
+                    updateArrowUI(ALL);
                 }
 
 

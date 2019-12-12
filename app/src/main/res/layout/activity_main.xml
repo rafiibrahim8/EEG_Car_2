@@ -132,13 +132,15 @@
             android:id="@+id/imgRight"
             android:src="@drawable/ic_arrow_right"/>
     </LinearLayout>
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-    android:textColor="#000"
-    android:text="@string/app_name"
-    android:id="@+id/timer"/>
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#000"
+        android:textSize="24sp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -182,10 +184,4 @@
             android:gravity="start"
             android:id="@+id/briefMWMConnection"/>
     </LinearLayout>
-    <Button
-        android:layout_marginTop="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="==Blink=="
-        android:id="@+id/testBlink"/>
 </LinearLayout>
