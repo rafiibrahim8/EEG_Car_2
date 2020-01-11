@@ -37,5 +37,7 @@
   <string name="mwmNotFound">MWM can not be found.\nMake sure the device is turned on then try again.</string>
   <string name="mwmNotPairedHint">MWM is not paired with this device.\nPlease pair/re-pair and try again.</string>
   <string name="carNotConnMsg">Car is not connected! Unable to send command.</string>
+  <string name="fireAlertMsg">Smoke is detected around the wheelchair. Please take immediate action.</string>
+  <string name="fallAlertMsg">Person has fallen from wheelchair. Please take immediate action.</string>
 
 </resources>
