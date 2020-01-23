@@ -5,12 +5,13 @@ const int FIRE = 0;
 const int FALL = 1;
 const int smokePin = A0;
 const int fireThreshold = 512;
-const int trigPin = 9;
+const int trigPin = 11;
 const int echoPin = 10;
+const int pwm = 50;
 
 char received;
 int prevFallState = 1;
-int currentFallState = 1;
+int currFallState = 1;
 int lastPing;
 bool fallAlertEnable = false;
 bool fireAlertEnable = false;
@@ -105,8 +106,8 @@ void reConfigure() {
 void checkFall() {
   if (fallAlertEnable) {
     prevFallState = currFallState;
-    currentFallState = digitalRead(psPin);
-    if (currentFallState == LOW && prevFallState == HIGH) {
+    currFallState = digitalRead(psPin);
+    if (currFallState == LOW && prevFallState == HIGH) {
       sendAlert(FALL);
     }
   }
@@ -129,20 +130,20 @@ void checkProximity() {
 }
 
 void goForword() {
-  analogWrite(6, 100);
-  analogWrite(9, 100);
+  analogWrite(6, pwm);
+  analogWrite(9, pwm);
 }
 void goBackword() {
-  analogWrite(3, 100);
-  analogWrite(5, 100);
+  analogWrite(3, pwm);
+  analogWrite(5, pwm);
 }
 void goLeft() {
-  analogWrite(3, 100);
-  analogWrite(9, 100);
+  analogWrite(3, pwm);
+  analogWrite(9, pwm);
 }
 void goRight() {
-  analogWrite(6, 100);
-  analogWrite(5, 100);
+  analogWrite(6, pwm);
+  analogWrite(5, pwm);
 }
 
 void stopWheels() {

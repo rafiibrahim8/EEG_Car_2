@@ -92,55 +92,117 @@
             android:id="@+id/tvBlinkStrength0"/>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/distance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FF0000"
-        android:textStyle="bold" />
-
     <LinearLayout
-        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:weightSum="1">
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".25"
-            android:id="@+id/imgUP"
-            android:src="@drawable/ic_arrow_up"/>
-        <ImageView
-            android:layout_width="wrap_content"
+            android:text="Direction:"
+            android:layout_weight=".4"
+            android:textSize="18sp"/>
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".25"
-            android:id="@+id/imgDown"
-            android:src="@drawable/ic_arrow_down"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".25"
-            android:id="@+id/imgLeft"
-            android:src="@drawable/ic_arrow_left"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".25"
-            android:id="@+id/imgRight"
-            android:src="@drawable/ic_arrow_right"/>
+            android:layout_weight=".6"
+            android:gravity="right">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_stop_black_24dp"
+                android:scaleX="2"
+                android:layout_marginRight="16dp"
+                android:scaleY="2"
+                android:id="@+id/direction" />
+        </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/timer"
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#000"
-        android:textSize="24sp" />
+        android:orientation="horizontal"
+        android:id="@+id/timer_layout">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".4"
+            android:layout_height="wrap_content"
+            android:text="Time Left:"
+            android:textSize="18sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:id="@+id/timer"
+            android:layout_weight=".6"
+            android:layout_height="wrap_content"
+            android:text="2.0 s"
+            android:fontFamily="@font/seven_segment"
+            android:textSize="24sp"
+            android:gravity="end"
+            android:layout_marginRight="16dp"
+            android:textColor="#000000"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/proximity_layout"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight=".4"
+            android:layout_height="wrap_content"
+            android:text="Proximity:"
+            android:textSize="18sp" />
+        <TextView
+            android:layout_width="0dp"
+            android:id="@+id/proximity"
+            android:layout_weight=".6"
+            android:layout_height="wrap_content"
+            android:text="18 CM"
+            android:fontFamily="@font/seven_segment"
+            android:textSize="24sp"
+            android:gravity="end"
+            android:layout_marginRight="16dp"
+            android:textColor="#000000"/>
+    </LinearLayout>
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fall Alert "
+        android:textOn="On"
+        android:textOff="Off"
+        android:textSize="18sp"
+        android:id="@+id/fallSwitch"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="16dp"/>
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Smoke Alert "
+        android:textSize="18sp"
+        android:textOn="On"
+        android:textOff="Off"
+        android:id="@+id/fireSwitch"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="16dp"/>
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Proximity Alert "
+        android:textOn="On"
+        android:textOff="Off"
+        android:textSize="18sp"
+        android:id="@+id/proximitySwitch"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="16dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -191,9 +253,4 @@
         android:text="==Blink=="
         android:id="@+id/testBlink"/>
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Switch" />
 </LinearLayout>

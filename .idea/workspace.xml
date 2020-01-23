@@ -11,14 +11,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92804a81-d821-415d-a5f4-215fc27b2683" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_stop_black_24dp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/seven_segment.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Arduino_Code/Arduino_Code.ino" beforeDir="false" afterPath="$PROJECT_DIR$/Arduino_Code/Arduino_Code.ino" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/CarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/CarController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +39,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="5200aff2f4a674cb" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus5x28" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -38,59 +48,27 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view />
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="EEG_Car_2" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
       </state>
     </system>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-773">
-              <caret line="166" column="9" lean-forward="true" selection-start-line="166" selection-start-column="9" selection-end-line="166" selection-end-column="9" />
-              <folding>
-                <element signature="e#3890#4000#1" />
-                <element signature="e#5594#5641#0" expanded="true" />
-                <element signature="e#5848#5895#0" expanded="true" />
-                <element signature="e#5109#5110#0" expanded="true" />
-                <element signature="e#5169#5170#0" expanded="true" />
-                <element signature="e#4486#4563#0" />
-                <element signature="e#4428#5585#0" />
-                <element signature="e#9949#10254#0" />
-                <element signature="e#9593#9663#1" />
-                <element signature="e#10112#10520#0" />
-                <element signature="e#10722#10771#1" />
-                <element signature="e#13682#13683#0" expanded="true" />
-                <element signature="e#10631#10802#0" />
-                <element signature="e#10808#10976#0" />
-                <element signature="e#10982#11543#0" />
-                <element signature="class#11063:11535" />
-                <element signature="e#11549#11958#0" />
-                <element signature="e#11755#11838#0" />
-                <element signature="e#11964#13485#0" />
-                <element signature="e#12046#12162#1" />
-                <element signature="e#12332#13395#0" />
-                <element signature="e#13491#14361#0" />
-                <element signature="e#14367#14601#0" />
-                <element signature="e#14607#14908#0" />
-                <element signature="e#14914#15795#0" />
-                <element signature="e#14992#15094#1" />
-                <element signature="e#15139#15233#1" />
-                <element signature="e#15380#15470#1" />
-                <element signature="e#15581#15662#1" />
-                <element signature="e#15801#16702#0" />
-                <element signature="e#16708#16860#0" />
-                <element signature="e#16866#17043#0" />
-                <element signature="e#16967#17994#0" />
-                <element signature="e#18000#18165#0" />
-                <element signature="e#17053#17282#0" />
-                <element signature="e#17327#17741#0" />
-                <element signature="e#22461#22489#0" expanded="true" />
-                <element signature="e#22575#22594#0" expanded="true" />
-                <element signature="e#17049#18810#0" />
-                <element signature="e#17449#18106#0" />
-              </folding>
+            <state relative-caret-position="285">
+              <caret line="163" column="10" selection-start-line="163" selection-start-column="10" selection-end-line="163" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -98,7 +76,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
+            <state relative-caret-position="600">
               <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
             </state>
           </provider>
@@ -107,8 +85,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/CarController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="135" column="17" selection-start-line="135" selection-start-column="17" selection-end-line="135" selection-end-column="17" />
+            <state relative-caret-position="1740">
+              <caret line="124" column="59" selection-start-line="124" selection-start-column="59" selection-end-line="124" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -116,12 +94,21 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-          <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="94" column="4" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="4" />
+            <state relative-caret-position="1770">
+              <caret line="118" column="34" selection-start-line="118" selection-start-column="34" selection-end-line="118" selection-end-column="34" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_arrow_down.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -138,9 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>h.</find>
-      <find>onre</find>
-      <find>onstat</find>
       <find>bluetooth</find>
       <find>bluetooths</find>
       <find>STOP</find>
@@ -159,7 +143,6 @@
       <find>carcon</find>
       <find>regist</find>
       <find>sends</find>
-      <find>currentS</find>
       <find>tat</find>
       <find>CurrentState</find>
       <find>setCu</find>
@@ -167,6 +150,11 @@
       <find>sendS</find>
       <find>testBlink</find>
       <find>test</find>
+      <find>timer</find>
+      <find>disconn</find>
+      <find>currentS</find>
+      <find>setCurr</find>
+      <find>dire</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -187,9 +175,10 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/bt_select_dialog_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/CarControler.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_arrow_down.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/CarController.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/MainActivity.java" />
       </list>
     </option>
@@ -207,33 +196,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="EEG_Car_2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="EEG_Car_2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="EEG_Car_2" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/app" />
@@ -244,12 +207,17 @@
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/.installs/AndroidStudio/Sdk" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Workspace/AndroidStudio/Keys/Nerds_Of_KU.jks" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/font" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
     <property name="show.do.not.ask.upgrade.gradle.plugin" value="3.5.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/font" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -340,9 +308,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1366" height="738" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Captures" order="0" sideWeight="0.5073892" side_tool="true" visible="true" weight="0.32954547" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49261084" visible="true" weight="0.32954547" />
+      <window_info id="Captures" order="0" sideWeight="0.5090312" side_tool="true" weight="0.32954547" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4909688" weight="0.32954547" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -357,14 +326,14 @@
       <window_info anchor="bottom" id="Terminal" order="4" sideWeight="0.49924242" weight="0.32840723" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5007576" side_tool="true" weight="0.32840723" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32840723" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.32512316" />
+      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.32512316" />
       <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
-      <window_info anchor="right" id="Gradle" order="2" />
+      <window_info anchor="right" id="Gradle" order="2" weight="0.32954547" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info active="true" anchor="right" id="Preview" order="5" visible="true" weight="0.32954547" />
+      <window_info anchor="right" id="Preview" order="5" weight="0.32954547" />
       <window_info anchor="right" id="Assistant" order="6" weight="0.32954547" />
     </layout>
     <layout-to-restore>
@@ -453,12 +422,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/bt_select_dialog_layout.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/maven_push.gradle">
       <provider selected="true" editor-type-id="text-editor">
@@ -486,77 +455,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/font/seven_segment.ttf">
+      <provider selected="true" editor-type-id="fontseditor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="163" column="10" selection-start-line="163" selection-start-column="10" selection-end-line="163" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
+        <state relative-caret-position="600">
           <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/CarController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="135" column="17" selection-start-line="135" selection-start-column="17" selection-end-line="135" selection-end-column="17" />
+        <state relative-caret-position="1740">
+          <caret line="124" column="59" selection-start-line="124" selection-start-column="59" selection-end-line="124" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ml/nerdsofku/eegcarx2/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-773">
-          <caret line="166" column="9" lean-forward="true" selection-start-line="166" selection-start-column="9" selection-end-line="166" selection-end-column="9" />
-          <folding>
-            <element signature="e#3890#4000#1" />
-            <element signature="e#5594#5641#0" expanded="true" />
-            <element signature="e#5848#5895#0" expanded="true" />
-            <element signature="e#5109#5110#0" expanded="true" />
-            <element signature="e#5169#5170#0" expanded="true" />
-            <element signature="e#4486#4563#0" />
-            <element signature="e#4428#5585#0" />
-            <element signature="e#9949#10254#0" />
-            <element signature="e#9593#9663#1" />
-            <element signature="e#10112#10520#0" />
-            <element signature="e#10722#10771#1" />
-            <element signature="e#13682#13683#0" expanded="true" />
-            <element signature="e#10631#10802#0" />
-            <element signature="e#10808#10976#0" />
-            <element signature="e#10982#11543#0" />
-            <element signature="class#11063:11535" />
-            <element signature="e#11549#11958#0" />
-            <element signature="e#11755#11838#0" />
-            <element signature="e#11964#13485#0" />
-            <element signature="e#12046#12162#1" />
-            <element signature="e#12332#13395#0" />
-            <element signature="e#13491#14361#0" />
-            <element signature="e#14367#14601#0" />
-            <element signature="e#14607#14908#0" />
-            <element signature="e#14914#15795#0" />
-            <element signature="e#14992#15094#1" />
-            <element signature="e#15139#15233#1" />
-            <element signature="e#15380#15470#1" />
-            <element signature="e#15581#15662#1" />
-            <element signature="e#15801#16702#0" />
-            <element signature="e#16708#16860#0" />
-            <element signature="e#16866#17043#0" />
-            <element signature="e#16967#17994#0" />
-            <element signature="e#18000#18165#0" />
-            <element signature="e#17053#17282#0" />
-            <element signature="e#17327#17741#0" />
-            <element signature="e#22461#22489#0" expanded="true" />
-            <element signature="e#22575#22594#0" expanded="true" />
-            <element signature="e#17049#18810#0" />
-            <element signature="e#17449#18106#0" />
-          </folding>
+        <state relative-caret-position="1770">
+          <caret line="118" column="34" selection-start-line="118" selection-start-column="34" selection-end-line="118" selection-end-column="34" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_arrow_down.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="94" column="4" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="4" />
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>

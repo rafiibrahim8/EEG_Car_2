@@ -13,10 +13,8 @@ public class CarController {
     public static final int RIGHT = 4;
     public static final int STOP = -1;
     public static final int NONE = 0;
-    public static final int ALL = 15;
 
     public static final long DIRECTION_HOLD_MS = 2000;
-    public static final long ARROW_BLINK_TIME = 250;
     public static final long DOUBLE_BLINK_THRESHOLD_MS = 800;
     public static final long BLINK_THRESHOLD = 60;
     public static final long ATTENTION_THRESHOLD = 50;
@@ -111,23 +109,19 @@ public class CarController {
         switch (currentState){
             case STATE_IDLE:
                 if(latBlinkStrength>=BLINK_THRESHOLD)
-                    currentState = STATE_CIRCLING_ARROWS;
-                updateStateUI(currentState);
+                    setCurrentState(STATE_CIRCLING_ARROWS);
                 break;
             case STATE_CIRCLING_ARROWS:
                 if(lastBlinkDifference<=DOUBLE_BLINK_THRESHOLD_MS)
-                    currentState=STATE_FIXED_ON_DIRECTION;
-                updateStateUI(currentState);
+                    setCurrentState(STATE_FIXED_ON_DIRECTION);
                 break;
             case STATE_RUNNING:
-                currentState = STATE_IDLE;
-                updateStateUI(currentState);
+                setCurrentState(STATE_IDLE);
                 currentPointedDirection.set(NONE);
                 sendCommandToCar(STOP);
                 break;
             case STATE_FIXED_ON_DIRECTION:
-                currentState = STATE_RUNNING;
-                updateStateUI(currentState);
+                setCurrentState(STATE_RUNNING);
                 sendCommandToCar(currentPointedDirection.get());
                 break;
         }
@@ -171,12 +165,9 @@ public class CarController {
 
                 else if(currentState == STATE_RUNNING){
                     updateArrowUI(currentPointedDirection.get());
-                    try{ Thread.sleep(ARROW_BLINK_TIME); } catch (Exception ex){}
-                    updateArrowUI(NONE);
-                    try{ Thread.sleep(ARROW_BLINK_TIME); } catch (Exception ex){}
                 }
                 else if(currentState ==STATE_IDLE){
-                    updateArrowUI(ALL);
+                    updateArrowUI(NONE);
                 }
 
 

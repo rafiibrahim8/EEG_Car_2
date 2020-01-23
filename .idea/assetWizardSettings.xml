@@ -138,7 +138,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/home/ibrahim/.local/share/JetBrains/Toolbox/apps/AndroidStudio/ch-0/191.5791312/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_arrow_forward_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/home/ibrahim/.local/share/JetBrains/Toolbox/apps/AndroidStudio/ch-0/191.6010548/plugins/android/lib/android.jar!/images/material_design_icons/av/ic_stop_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -149,7 +149,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="ff0000" />
-                            <entry key="outputName" value="ic_arrow_right" />
+                            <entry key="outputName" value="ic_stop_black_24dp" />
                             <entry key="sourceFile" value="$USER_HOME$" />
                           </map>
                         </option>

@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,9 +25,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,22 +79,23 @@ public class MainActivity extends AppCompatActivity {
     TextView briefMWMConnection;
     @BindView(R.id.signalLayout)
     LinearLayout signalLayout;
-
-
+    @BindView(R.id.direction)
+    ImageView imgDir;
+    @BindView(R.id.proximity_layout)
+    LinearLayout proximityLayout;
+    @BindView(R.id.timer_layout)
+    LinearLayout timerLayout;
+    @BindView(R.id.fallSwitch)
+    Switch fallSwitch;
+    @BindView(R.id.proximitySwitch)
+    Switch proximitySwitch;
+    @BindView(R.id.fireSwitch)
+    Switch fireSwitch;
     @BindView(R.id.btnConnectCar0)
     Button btnCar;
     @BindView(R.id.btnConnectMWM0)
     Button btnMWM;
-
-    @BindView(R.id.imgDown)
-    ImageView imgBackward;
-    @BindView(R.id.imgUP)
-    ImageView imgForward;
-    @BindView(R.id.imgLeft)
-    ImageView imgLeft;
-    @BindView(R.id.imgRight)
-    ImageView imgRight;
-    @BindView(R.id.distance)
+    @BindView(R.id.proximity)
     TextView distance;
     @BindView(R.id.timer)
     TextView timer;
@@ -140,7 +144,8 @@ public class MainActivity extends AppCompatActivity {
         isConnected = new boolean[]{false, false};
 
         signalLayout.setVisibility(View.GONE);
-        distance.setVisibility(View.INVISIBLE);
+        proximityLayout.setVisibility(View.INVISIBLE);
+        timerLayout.setVisibility(View.INVISIBLE);
         btInput = null;
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -152,9 +157,43 @@ public class MainActivity extends AppCompatActivity {
         initBTReceiver();
         registerBroadcasts();
         getPermission();
+        initSwitches();
+        enableSwitches(false);
         runPingThread();
 
-        testBlink.setVisibility(View.GONE);
+        //testBlink.setVisibility(View.GONE);
+    }
+
+    private void enableSwitches(boolean b) {
+        if(b){
+            fallSwitch.setEnabled(true);
+            fireSwitch.setEnabled(true);
+            proximitySwitch.setEnabled(true);
+            return;
+        }
+        fallSwitch.setChecked(false);
+        fallSwitch.setEnabled(false);
+        fireSwitch.setChecked(false);
+        fireSwitch.setEnabled(false);
+        proximitySwitch.setChecked(false);
+        proximitySwitch.setEnabled(false);
+    }
+
+    private void initSwitches() {
+        fallSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) sendSignalToCar(""+FALL_ENABLE);
+            else sendSignalToCar(""+FALL_DISABLE);
+        });
+
+        fireSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) sendSignalToCar(""+FIRE_ENABLE);
+            else sendSignalToCar(""+FIRE_DISABLE);
+        });
+
+        proximitySwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) sendSignalToCar(""+PROX_ENABLE);
+            else sendSignalToCar(""+PROX_DISABLE);
+        });
     }
 
     void handleDistance(int distance){
@@ -227,7 +266,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
     private void initBTReceiver() {
         new Thread(() -> {
             while (true) {
@@ -259,43 +297,22 @@ public class MainActivity extends AppCompatActivity {
         BroadcastReceiver brArrow = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                int uiCode = intent.getIntExtra("arrows", CarController.ALL);
+                int uiCode = intent.getIntExtra("arrows", CarController.NONE);
                 switch (uiCode) {
                     case CarController.FORWARD:
-                        imgForward.setVisibility(View.VISIBLE);
-                        imgBackward.setVisibility(View.INVISIBLE);
-                        imgLeft.setVisibility(View.INVISIBLE);
-                        imgRight.setVisibility(View.INVISIBLE);
+                        imgDir.setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_up));
                         break;
                     case CarController.BACKWARD:
-                        imgForward.setVisibility(View.INVISIBLE);
-                        imgBackward.setVisibility(View.VISIBLE);
-                        imgLeft.setVisibility(View.INVISIBLE);
-                        imgRight.setVisibility(View.INVISIBLE);
+                        imgDir.setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_down));
                         break;
                     case CarController.LEFT:
-                        imgForward.setVisibility(View.INVISIBLE);
-                        imgBackward.setVisibility(View.INVISIBLE);
-                        imgLeft.setVisibility(View.VISIBLE);
-                        imgRight.setVisibility(View.INVISIBLE);
+                        imgDir.setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_left));
                         break;
                     case CarController.RIGHT:
-                        imgForward.setVisibility(View.INVISIBLE);
-                        imgBackward.setVisibility(View.INVISIBLE);
-                        imgLeft.setVisibility(View.INVISIBLE);
-                        imgRight.setVisibility(View.VISIBLE);
-                        break;
-                    case CarController.ALL:
-                        imgForward.setVisibility(View.VISIBLE);
-                        imgBackward.setVisibility(View.VISIBLE);
-                        imgLeft.setVisibility(View.VISIBLE);
-                        imgRight.setVisibility(View.VISIBLE);
+                        imgDir.setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_right));
                         break;
                     case CarController.NONE:
-                        imgForward.setVisibility(View.INVISIBLE);
-                        imgBackward.setVisibility(View.INVISIBLE);
-                        imgLeft.setVisibility(View.INVISIBLE);
-                        imgRight.setVisibility(View.INVISIBLE);
+                        imgDir.setImageDrawable(getResources().getDrawable(R.drawable.ic_stop_black_24dp));
                         break;
                 }
             }
@@ -319,8 +336,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 int state = intent.getIntExtra("state",CarController.STATE_IDLE);
-                if(state == CarController.STATE_CIRCLING_ARROWS) timer.setVisibility(View.VISIBLE);
-                else timer.setVisibility(View.GONE);
+                if(state == CarController.STATE_CIRCLING_ARROWS) timerLayout.setVisibility(View.VISIBLE);
+                else timerLayout.setVisibility(View.INVISIBLE);
+                if(state == CarController.STATE_RUNNING) imgDir.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+                else imgDir.setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
             }
         };
 
@@ -328,7 +347,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String distanceFromCar = intent.getStringExtra("distance");
-                distance.setVisibility(View.VISIBLE);
+                proximityLayout.setVisibility(View.VISIBLE);
                 distance.setText(distanceFromCar);
                 if(intent.getBooleanExtra("alert",false)){
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -540,12 +559,9 @@ public class MainActivity extends AppCompatActivity {
         TextView dialogHead = dialog.findViewById(R.id.dialog_head);
         ListView listView = dialog.findViewById(R.id.dialog_listView);
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, btDevices);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                dialog.dismiss();
-                connectBluetooth(btDevices[i].substring(0, btDevices[i].length() - 18), btDevices[i].substring(btDevices[i].length() - 17));
-            }
+        listView.setOnItemClickListener((parent, view, i, id) -> {
+            dialog.dismiss();
+            connectBluetooth(btDevices[i].substring(0, btDevices[i].length() - 18), btDevices[i].substring(btDevices[i].length() - 17));
         });
         listView.setAdapter(arrayAdapter);
         dialogHead.setText(R.string.selectCar);
@@ -623,7 +639,7 @@ public class MainActivity extends AppCompatActivity {
                         failCount++;
                     }
                     if(failCount>2){
-                        Toast.makeText(this,"Car is Disconnected",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this,"Car is Disconnected.",Toast.LENGTH_SHORT).show();
                         initDisconnect();
                     }
                 }
@@ -639,9 +655,12 @@ public class MainActivity extends AppCompatActivity {
             briefCarConnection.setText(R.string.carNotConnectedHint);
             briefCarConnection.setTextColor(Color.RED);
             btnCar.setText(R.string.connectCar);
+            carController.setCurrentState(CarController.STATE_IDLE);
+            enableSwitches(false);
         } catch (IOException e) {
         }
     }
+
 
     //this class is for connecting HC-05 only
     private class ConnectBT extends AsyncTask<Void, Void, Void> {
@@ -681,6 +700,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
 
                 isConnected[HC05] = true;
+                enableSwitches(true);
                 btnCar.setText(R.string.conOK);
                 carController.setCarConnected(true);
                 briefCarConnection.setTextColor(Color.GREEN);
