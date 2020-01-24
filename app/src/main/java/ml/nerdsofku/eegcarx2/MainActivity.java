@@ -17,6 +17,7 @@ import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.telephony.SmsManager;
@@ -51,6 +52,7 @@ import com.github.pwittchen.neurosky.library.message.enums.State;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
@@ -58,6 +60,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import static android.util.Log.d;
+import static android.util.Log.e;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -220,9 +223,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     void toastShort(String text){
-        Toast.makeText(this,text,Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this,text,Toast.LENGTH_LONG).show();
     }
     void handleRecvChar(char c){
+        d("BTRs","T: "+c);
         switch (c){
             case FIRE_ALERT:
                 sendAlert(FIRE_ALERT);
@@ -232,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case FALL_ENABLE:
                 toastShort("Fall alert enabled.");
+                d("BTRsE","T: "+c);
                 break;
             case FALL_DISABLE:
                 toastShort("Fall alert disabled.");
@@ -268,11 +273,15 @@ public class MainActivity extends AppCompatActivity {
     }
     private void initBTReceiver() {
         new Thread(() -> {
+            Looper.prepare();
+            String distance = "";
             while (true) {
                 try {
                     if (btInput != null && btInput.available() > 0) {
-                        String distance = "";
+
+
                         char recv = (char)(btInput.read()&0xFF);
+                        d("BTRecv","RE: "+recv);
                         if(Character.isDigit(recv)){
                             distance+=recv;
                         }
@@ -348,7 +357,7 @@ public class MainActivity extends AppCompatActivity {
             public void onReceive(Context context, Intent intent) {
                 String distanceFromCar = intent.getStringExtra("distance");
                 proximityLayout.setVisibility(View.VISIBLE);
-                distance.setText(distanceFromCar);
+                distance.setText(distanceFromCar+" CM");
                 if(intent.getBooleanExtra("alert",false)){
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -444,6 +453,7 @@ public class MainActivity extends AppCompatActivity {
         }
         try {
             bluetoothSocket.getOutputStream().write(signal.getBytes());
+            d("SignalCar",signal);
         } catch (Exception ex) {
             Toast.makeText(this, R.string.errOccered, Toast.LENGTH_LONG).show();
         }
@@ -628,14 +638,27 @@ public class MainActivity extends AppCompatActivity {
 
     private void runPingThread(){
         new Thread(()->{
+            Looper.prepare();
             int failCount = 0;
+            boolean delayed = false;
+            int dt = 0;
             while (true){
                 if(bluetoothSocket!=null){
                     try {
-                        bluetoothSocket.getOutputStream().write(PING_CHAR.getBytes());
+                        //OutputStream outputStream = bluetoothSocket.getOutputStream();
+                        //bluetoothSocket.getOutputStream().write(PING_CHAR.getBytes());
+                        if(delayed){
+                            sendSignalToCar(PING_CHAR);
+                            d("EXE","NN");
+                        }
+                        if(!delayed){
+                            dt++;
+                            if(dt>30)
+                                delayed = true;
+                        }
                         failCount = 0;
                         sleep(300);
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         failCount++;
                     }
                     if(failCount>2){
@@ -683,8 +706,9 @@ public class MainActivity extends AppCompatActivity {
                     bluetoothSocket = remoteDev.createInsecureRfcommSocketToServiceRecord(uuid);
                     //bluetoothAdapter.cancelDiscovery();
                     bluetoothSocket.connect();
-                    btInput = bluetoothSocket.getInputStream();
+                    //btInput = bluetoothSocket.getInputStream();
                 } catch (Exception ex) {
+                    d("EXE",ex.getLocalizedMessage());
                     success = false;
                 }
 
@@ -708,6 +732,15 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.conOK, Toast.LENGTH_SHORT).show();
             }
             progressDialog.dismiss();
+            try {
+                btInput = bluetoothSocket.getInputStream();
+                if(btInput == null){
+                    e("BTSoc","Null");
+                }
+            } catch (IOException e) {
+                e("BTSoc","Failed");
+            }
+
         }
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-  <string name="app_name">EEG Car</string>
+  <string name="app_name">EEG Wheelchair</string>
   <string name="connect">connect</string>
   <string name="disconnect">disconnect</string>
   <string name="stop_monitoring">stop monitoring</string>

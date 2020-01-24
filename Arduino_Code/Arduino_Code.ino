@@ -1,5 +1,5 @@
 const int led = 13;
-const int pingThreshold = 700;
+const int pingThreshold = 2000;
 const int psPin = 2;
 const int FIRE = 0;
 const int FALL = 1;
@@ -7,12 +7,12 @@ const int smokePin = A0;
 const int fireThreshold = 512;
 const int trigPin = 11;
 const int echoPin = 10;
-const int pwm = 50;
+const int pwm = 75;
 
 char received;
 int prevFallState = 1;
 int currFallState = 1;
-int lastPing;
+unsigned long lastPing;
 bool fallAlertEnable = false;
 bool fireAlertEnable = false;
 bool proximityAlertEnable = false;
@@ -48,13 +48,15 @@ void waitToConnect() {
 void work() {
   digitalWrite(led, HIGH);
   while (1) {
+    received='Z';
     if (Serial.available() > 1) {
       received = Serial.read();
       lastPing = millis();
     }
+    if(received!='Z')
+      Serial.write(received);
     switch (received) {
       case 'Z':
-        continue;
         break;
       case 'E':
         fallAlertEnable = true;
@@ -94,6 +96,7 @@ void work() {
     checkFall();
     checkFire();
     checkProximity();
+    delay(40);
   }
   digitalWrite(led, LOW);
 }
