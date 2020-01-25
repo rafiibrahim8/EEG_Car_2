@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
     private String remoteAddr, remoteName;
     private BluetoothSocket bluetoothSocket;
     private AtomicBoolean[] isConnected;
+    private String phoneNumber;
     private final UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); //uuid for hc-05
 
     @Override
@@ -145,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        phoneNumber = getIntent().getStringExtra("eeg_2_ph_number");
         neuroSky = createNeuroSky();
         carController = new CarController(this);
         isConnected = new AtomicBoolean[]{new AtomicBoolean(false), new AtomicBoolean(false)};
@@ -169,6 +171,8 @@ public class MainActivity extends AppCompatActivity {
         runPingThread();
 
         //testBlink.setVisibility(View.GONE);
+
+        d("PhoneNumber",phoneNumber);
     }
     
     private void toaster(String msg,int duration){
@@ -237,12 +241,12 @@ public class MainActivity extends AppCompatActivity {
     }
     void sendAlert(char type){
         if(type==FALL_ALERT){
-            sendSms("01682901639",getResources().getString(R.string.fallAlertMsg));
+            sendSms(phoneNumber,getResources().getString(R.string.fallAlertMsg));
             return;
         }
         if(System.currentTimeMillis()-lastFireAlert > MIN_FIRE_INTERVAL_SECS*1000){
             lastFireAlert = System.currentTimeMillis();
-            sendSms("01682901639",getResources().getString(R.string.fireAlertMsg));
+            sendSms(phoneNumber,getResources().getString(R.string.fireAlertMsg));
         }
     }
     void handleRecvChar(char c){
@@ -782,5 +786,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        System.exit(0);
     }
 }

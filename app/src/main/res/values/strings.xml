@@ -39,5 +39,7 @@
   <string name="carNotConnMsg">Wheelchair is not connected! Unable to send command.</string>
   <string name="fireAlertMsg">Smoke is detected around the wheelchair. Please take immediate action.</string>
   <string name="fallAlertMsg">Person has fallen from wheelchair. Please take immediate action.</string>
+  <string name="phone_no_hint">Enter phone number</string>
+  <string name="_continue">Continue</string>
 
 </resources>
