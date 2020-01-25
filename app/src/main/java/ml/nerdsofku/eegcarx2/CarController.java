@@ -14,7 +14,7 @@ public class CarController {
     public static final int STOP = -1;
     public static final int NONE = 0;
 
-    public static final long DIRECTION_HOLD_MS = 2000;
+    public static final long DIRECTION_HOLD_MS = 4000;
     public static final long DOUBLE_BLINK_THRESHOLD_MS = 800;
     public static final long BLINK_THRESHOLD = 60;
     public static final long ATTENTION_THRESHOLD = 50;
@@ -127,6 +127,10 @@ public class CarController {
         }
     }
 
+    public int getCurrentPointedDirection() {
+        return currentPointedDirection.get();
+    }
+
     private void updateArrowUI(int dir){
         Intent intent = new Intent("updateArrows");
         intent.putExtra("arrows",dir);
@@ -135,7 +139,7 @@ public class CarController {
 
     private void updateTimerUI(float left){
         Intent intent = new Intent("updateTimer");
-        intent.putExtra("leftTime","Arrow will change in "+left+"s");
+        intent.putExtra("leftTime",left+" s");
         context.sendBroadcast(intent);
     }
 

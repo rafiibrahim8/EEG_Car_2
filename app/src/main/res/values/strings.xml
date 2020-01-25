@@ -11,7 +11,7 @@
   <string name="waiting_for_state">waiting for state...</string>
   <string name="neg1">-1</string>
   <string name="connectingMWM">Connecting to MWM&#8230;</string>
-  <string name="connectingCar">Connecting to Car&#8230;</string>
+  <string name="connectingCar">Connecting to Wheelchair&#8230;</string>
   <string name="blueUnav">Bluetooth device not available.</string>
   <string name="noPaired">No paired device found.</string>
   <string name="selectDev">Select a device:</string>
@@ -26,17 +26,17 @@
   <string name="blueNotOnPromt">Bluetooth is off. Turn it on?</string>
   <string name="blueNotOn">Bluetooth is off.</string>
   <string name="turnOn">Turn On</string>
-  <string name="selectCar">Select the Car</string>
+  <string name="selectCar">Select the Wheelchair</string>
   <string name="selectEEG">Select the EEG</string>
   <string name="connectMWM">Connect MWM</string>
-  <string name="connectCar">Connect Car</string>
+  <string name="connectCar">Connect HC</string>
   <string name="mwmNotConnectedHint">MWM is not connected.\nTap the button above to connect.</string>
-  <string name="carNotConnectedHint">Car is not connected.\nTap the button above to connect.</string>
+  <string name="carNotConnectedHint">Wheelchair is not connected.\nTap the button above to connect.</string>
   <string name="mwmConnectedHint">MWM is connected successfully.\nTap the button above to disconnect.</string>
-  <string name="carConnectedHint">Car is connected successfully.\nTap the button above to disconnect.</string>
+  <string name="carConnectedHint">Wheelchair is connected successfully.\nTap the button above to disconnect.</string>
   <string name="mwmNotFound">MWM can not be found.\nMake sure the device is turned on then try again.</string>
   <string name="mwmNotPairedHint">MWM is not paired with this device.\nPlease pair/re-pair and try again.</string>
-  <string name="carNotConnMsg">Car is not connected! Unable to send command.</string>
+  <string name="carNotConnMsg">Wheelchair is not connected! Unable to send command.</string>
   <string name="fireAlertMsg">Smoke is detected around the wheelchair. Please take immediate action.</string>
   <string name="fallAlertMsg">Person has fallen from wheelchair. Please take immediate action.</string>
 

@@ -10,8 +10,8 @@ const int echoPin = 10;
 const int pwm = 75;
 
 char received;
-int prevFallState = 1;
-int currFallState = 1;
+int prevFallState = 0;
+int currFallState = 0;
 unsigned long lastPing;
 bool fallAlertEnable = false;
 bool fireAlertEnable = false;
@@ -111,6 +111,7 @@ void checkFall() {
     prevFallState = currFallState;
     currFallState = digitalRead(psPin);
     if (currFallState == LOW && prevFallState == HIGH) {
+      stopWheels();
       sendAlert(FALL);
     }
   }

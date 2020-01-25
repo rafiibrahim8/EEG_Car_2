@@ -114,9 +114,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_stop_black_24dp"
-                android:scaleX="2"
+                android:scaleX="1.8"
                 android:layout_marginRight="16dp"
-                android:scaleY="2"
+                android:scaleY="1.5"
                 android:id="@+id/direction" />
         </LinearLayout>
     </LinearLayout>

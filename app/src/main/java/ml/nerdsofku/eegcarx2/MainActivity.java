@@ -58,6 +58,7 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static android.util.Log.d;
 import static android.util.Log.e;
@@ -123,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
     public static final char STOP = 'S';
 
     private static final int NSMW2 = 1;
+    private static final int MAX_PROXIMITY = 1000; //cm
     private static final int MIN_SAFE_DISTANCE = 10;  //cm
     private static final long MIN_FIRE_INTERVAL_SECS = 60;
     private static final int HC05 = 0;
@@ -130,10 +132,11 @@ public class MainActivity extends AppCompatActivity {
     private Vibrator vibrator;
     private BluetoothAdapter bluetoothAdapter;
     private InputStream btInput;
+    private OutputStream btOutput;
     private String[] btDevices;
     private String remoteAddr, remoteName;
     private BluetoothSocket bluetoothSocket;
-    private boolean[] isConnected;
+    private AtomicBoolean[] isConnected;
     private final UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); //uuid for hc-05
 
     @Override
@@ -144,12 +147,13 @@ public class MainActivity extends AppCompatActivity {
 
         neuroSky = createNeuroSky();
         carController = new CarController(this);
-        isConnected = new boolean[]{false, false};
+        isConnected = new AtomicBoolean[]{new AtomicBoolean(false), new AtomicBoolean(false)};
 
         signalLayout.setVisibility(View.GONE);
         proximityLayout.setVisibility(View.INVISIBLE);
         timerLayout.setVisibility(View.INVISIBLE);
         btInput = null;
+        btOutput = null;
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (bluetoothAdapter == null) {
@@ -165,6 +169,16 @@ public class MainActivity extends AppCompatActivity {
         runPingThread();
 
         //testBlink.setVisibility(View.GONE);
+    }
+    
+    private void toaster(String msg,int duration){
+        Intent intent = new Intent("toaster");
+        intent.putExtra("msg", msg);
+        intent.putExtra("duration",duration);
+        this.sendBroadcast(intent);
+    }
+    private void toaster(String msg){
+        toaster(msg,Toast.LENGTH_SHORT);
     }
 
     private void enableSwitches(boolean b) {
@@ -194,15 +208,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
         proximitySwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(isChecked) sendSignalToCar(""+PROX_ENABLE);
-            else sendSignalToCar(""+PROX_DISABLE);
+            if(isChecked){
+                sendSignalToCar(""+PROX_ENABLE);
+                proximityLayout.setVisibility(View.VISIBLE);
+            }
+            else{
+                sendSignalToCar(""+PROX_DISABLE);
+                proximityLayout.setVisibility(View.INVISIBLE);
+            }
         });
     }
 
     void handleDistance(int distance){
         Intent intent = new Intent("proximity");
-        intent.putExtra("distance", String.valueOf(distance));
-        if(distance<MIN_SAFE_DISTANCE && carController.getCurrentState() == CarController.STATE_RUNNING){
+        if(distance>MAX_PROXIMITY)
+            intent.putExtra("distance", "NIR");
+        else
+            intent.putExtra("distance", String.valueOf(distance)+"CM");
+        if(distance<MIN_SAFE_DISTANCE && carController.getCurrentState() == CarController.STATE_RUNNING && carController.getCurrentPointedDirection()!=CarController.BACKWARD){
             intent.putExtra("alert",true);
             carController.setCurrentState(CarController.STATE_IDLE);
             sendSignalToCar("S");
@@ -214,16 +237,13 @@ public class MainActivity extends AppCompatActivity {
     }
     void sendAlert(char type){
         if(type==FALL_ALERT){
-            sendSms("01791252075",getResources().getString(R.string.fallAlertMsg));
+            sendSms("01682901639",getResources().getString(R.string.fallAlertMsg));
             return;
         }
         if(System.currentTimeMillis()-lastFireAlert > MIN_FIRE_INTERVAL_SECS*1000){
             lastFireAlert = System.currentTimeMillis();
-            sendSms("01791252075",getResources().getString(R.string.fireAlertMsg));
+            sendSms("01682901639",getResources().getString(R.string.fireAlertMsg));
         }
-    }
-    void toastShort(String text){
-        Toast.makeText(MainActivity.this,text,Toast.LENGTH_LONG).show();
     }
     void handleRecvChar(char c){
         d("BTRs","T: "+c);
@@ -232,41 +252,43 @@ public class MainActivity extends AppCompatActivity {
                 sendAlert(FIRE_ALERT);
                 break;
             case FALL_ALERT:
+                carController.setCurrentState(CarController.STATE_IDLE);
+                sendSignalToCar("S");
                 sendAlert(FALL_ALERT);
                 break;
             case FALL_ENABLE:
-                toastShort("Fall alert enabled.");
+                toaster("Fall alert enabled.");
                 d("BTRsE","T: "+c);
                 break;
             case FALL_DISABLE:
-                toastShort("Fall alert disabled.");
+                toaster("Fall alert disabled.");
                 break;
             case FIRE_ENABLE:
-                toastShort("Fire alert enabled. ");
+                toaster("Fire alert enabled. ");
                 break;
             case FIRE_DISABLE:
-                toastShort("Fire alert disabled. ");
+                toaster("Fire alert disabled. ");
                 break;
             case PROX_DISABLE:
-                toastShort("Proximity alert disabled");
+                toaster("Proximity alert disabled");
                 break;
             case PROX_ENABLE:
-                toastShort("Proximity alert enabled.");
+                toaster("Proximity alert enabled.");
                 break;
             case STOP:
-                toastShort("Wheelchair is stopped.");
+                toaster("Wheelchair is stopped.");
                 break;
             case LEFT:
-                toastShort("Wheelchair is going left.");
+                toaster("Wheelchair is going left.");
                 break;
             case RIGHT:
-                toastShort("Wheelchair is going right.");
+                toaster("Wheelchair is going right.");
                 break;
             case FORWORD:
-                toastShort("Wheelchair is going forword.");
+                toaster("Wheelchair is going forword.");
                 break;
             case BACKWORD:
-                toastShort("Wheelchair is going backword.");
+                toaster("Wheelchair is going backword.");
                 break;
 
         }
@@ -277,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
             String distance = "";
             while (true) {
                 try {
-                    if (btInput != null && btInput.available() > 0) {
+                    if (isConnected[HC05].get() && btInput != null && btInput.available() > 0) {
 
 
                         char recv = (char)(btInput.read()&0xFF);
@@ -295,7 +317,8 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
+                    d("HHer","JJ");
                 }
             }
         }).start();
@@ -356,11 +379,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String distanceFromCar = intent.getStringExtra("distance");
-                proximityLayout.setVisibility(View.VISIBLE);
-                distance.setText(distanceFromCar+" CM");
+                //proximityLayout.setVisibility(View.VISIBLE);
+                distance.setText(distanceFromCar);
                 if(intent.getBooleanExtra("alert",false)){
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+                        vibrator.vibrate(VibrationEffect.createOneShot(800, VibrationEffect.DEFAULT_AMPLITUDE));
                     } else {
                         vibrator.vibrate(200);
                     }
@@ -368,6 +391,22 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        BroadcastReceiver brToaster = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Toast.makeText(MainActivity.this,intent.getStringExtra("msg"),intent.getIntExtra("duration",Toast.LENGTH_SHORT)).show();
+            }
+        };
+
+        BroadcastReceiver brHC05disconnect = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                initDisconnect();
+            }
+        };
+
+        registerReceiver(brHC05disconnect,new IntentFilter("eeg_x_disconnect_hc05"));
+        registerReceiver(brToaster,new IntentFilter("toaster"));
         registerReceiver(brTimer, new IntentFilter("updateTimer"));
         registerReceiver(brArrow, new IntentFilter("updateArrows"));
         registerReceiver(brCar, new IntentFilter("sendToCar"));
@@ -446,16 +485,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void sendSignalToCar(String signal) {
-        if (!isConnected[HC05]) {
+    private boolean sendSignalToCar(String signal) {
+        if (!isConnected[HC05].get()) {
             Toast.makeText(this, R.string.carNotConnMsg, Toast.LENGTH_LONG).show();
-            return;
+            return false;
         }
         try {
-            bluetoothSocket.getOutputStream().write(signal.getBytes());
+            btOutput.write(signal.getBytes());
             d("SignalCar",signal);
+            return true;
         } catch (Exception ex) {
             Toast.makeText(this, R.string.errOccered, Toast.LENGTH_LONG).show();
+            return false;
         }
     }
 
@@ -466,7 +507,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (!state.equals(State.CONNECTED)) {
             btnMWM.setText(R.string.connectMWM);
-            isConnected[NSMW2] = false;
+            isConnected[NSMW2].set(false);
         }
 
         switch (state) {
@@ -475,7 +516,7 @@ public class MainActivity extends AppCompatActivity {
                 briefMWMConnection.setTextColor(Color.GREEN);
 
                 btnMWM.setText(R.string.conOK);
-                isConnected[NSMW2] = true;
+                isConnected[NSMW2].set(true);
                 neuroSky.start();
                 break;
             case NOT_FOUND:
@@ -643,44 +684,42 @@ public class MainActivity extends AppCompatActivity {
             boolean delayed = false;
             int dt = 0;
             while (true){
-                if(bluetoothSocket!=null){
-                    try {
-                        //OutputStream outputStream = bluetoothSocket.getOutputStream();
-                        //bluetoothSocket.getOutputStream().write(PING_CHAR.getBytes());
-                        if(delayed){
-                            sendSignalToCar(PING_CHAR);
-                            d("EXE","NN");
-                        }
-                        if(!delayed){
-                            dt++;
-                            if(dt>30)
-                                delayed = true;
-                        }
-                        failCount = 0;
-                        sleep(300);
-                    } catch (Exception e) {
-                        failCount++;
-                    }
+                if(btOutput!=null){
+                    if(sendSignalToCar(PING_CHAR))
+                        failCount=0;
+                    else failCount++;
+
+                    sleep(300);
                     if(failCount>2){
-                        Toast.makeText(this,"Car is Disconnected.",Toast.LENGTH_SHORT).show();
-                        initDisconnect();
+                        toaster("Wheelchair connection lost.");
+                        broadcastDisconnect();
                     }
                 }
             }
         }).start();
     }
 
+    private void broadcastDisconnect() {
+        Intent intent = new Intent("eeg_x_disconnect_hc05");
+        this.sendBroadcast(intent);
+    }
+
     private void initDisconnect() {
+        d("InitDisc","In");
         try {
-            bluetoothSocket.close();
-            bluetoothSocket = null;
-            isConnected[HC05] = false;
+            isConnected[HC05].set(false);
+            btOutput = null;
+            btInput = null;
+
             briefCarConnection.setText(R.string.carNotConnectedHint);
             briefCarConnection.setTextColor(Color.RED);
             btnCar.setText(R.string.connectCar);
             carController.setCurrentState(CarController.STATE_IDLE);
             enableSwitches(false);
-        } catch (IOException e) {
+
+            bluetoothSocket.close();
+            bluetoothSocket = null;
+        } catch (Exception e) {
         }
     }
 
@@ -700,7 +739,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            if (bluetoothSocket == null || !isConnected[HC05]) {
+            if (bluetoothSocket == null || !isConnected[HC05].get()) {
                 try {
                     BluetoothDevice remoteDev = bluetoothAdapter.getRemoteDevice(remoteAddr);
                     bluetoothSocket = remoteDev.createInsecureRfcommSocketToServiceRecord(uuid);
@@ -723,7 +762,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.conFailed, Toast.LENGTH_LONG).show();
             } else {
 
-                isConnected[HC05] = true;
+                isConnected[HC05].set(true);
                 enableSwitches(true);
                 btnCar.setText(R.string.conOK);
                 carController.setCarConnected(true);
@@ -734,6 +773,7 @@ public class MainActivity extends AppCompatActivity {
             progressDialog.dismiss();
             try {
                 btInput = bluetoothSocket.getInputStream();
+                btOutput = bluetoothSocket.getOutputStream();
                 if(btInput == null){
                     e("BTSoc","Null");
                 }
