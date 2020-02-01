@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
         enableSwitches(false);
         runPingThread();
 
-        //testBlink.setVisibility(View.GONE);
+        testBlink.setVisibility(View.GONE);
 
         d("PhoneNumber",phoneNumber);
     }

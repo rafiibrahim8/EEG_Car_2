@@ -16,7 +16,7 @@ unsigned long lastPing;
 bool fallAlertEnable = false;
 bool fireAlertEnable = false;
 bool proximityAlertEnable = false;
-int fireValues[5] = {1023, 1023, 1023, 1023, 1023};
+int fireValues[5] = {0, 0, 0, 0, 0};
 
 void setup()
 {
