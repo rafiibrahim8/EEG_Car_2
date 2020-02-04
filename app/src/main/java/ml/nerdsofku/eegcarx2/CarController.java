@@ -16,7 +16,7 @@ public class CarController {
 
     public static final long DIRECTION_HOLD_MS = 4000;
     public static final long DOUBLE_BLINK_THRESHOLD_MS = 800;
-    public static final long BLINK_THRESHOLD = 60;
+    public static final long BLINK_THRESHOLD = 65;
     public static final long ATTENTION_THRESHOLD = 50;
 
     public static final int STATE_IDLE = 100;
@@ -95,7 +95,12 @@ public class CarController {
     }
 
     public void registerBlink(int strength){
+
+        if(strength<BLINK_THRESHOLD)
+            return;
         this.lastBlinkDifference = System.currentTimeMillis() - lastBlinkTime;
+        if(this.lastBlinkDifference<100)
+            return;
         this.lastBlinkTime = System.currentTimeMillis();
         this.latBlinkStrength = strength;
         onBlinkRegister();
@@ -112,7 +117,7 @@ public class CarController {
                     setCurrentState(STATE_CIRCLING_ARROWS);
                 break;
             case STATE_CIRCLING_ARROWS:
-                if(lastBlinkDifference<=DOUBLE_BLINK_THRESHOLD_MS)
+                //if(lastBlinkDifference<=DOUBLE_BLINK_THRESHOLD_MS)
                     setCurrentState(STATE_FIXED_ON_DIRECTION);
                 break;
             case STATE_RUNNING:

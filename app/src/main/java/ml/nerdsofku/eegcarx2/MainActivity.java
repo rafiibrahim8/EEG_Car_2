@@ -125,8 +125,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int NSMW2 = 1;
     private static final int MAX_PROXIMITY = 1000; //cm
-    private static final int MIN_SAFE_DISTANCE = 10;  //cm
-    private static final long MIN_FIRE_INTERVAL_SECS = 60;
+    private static final int MIN_SAFE_DISTANCE = 20;  //cm
+    private static final long MIN_FIRE_INTERVAL_SECS = 30;
     private static final int HC05 = 0;
     private long lastFireAlert = 0;
     private Vibrator vibrator;
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
         enableSwitches(false);
         runPingThread();
 
-        testBlink.setVisibility(View.GONE);
+        //testBlink.setVisibility(View.GONE);
 
         d("PhoneNumber",phoneNumber);
     }

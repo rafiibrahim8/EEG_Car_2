@@ -4,10 +4,10 @@ const int psPin = 2;
 const int FIRE = 0;
 const int FALL = 1;
 const int smokePin = A0;
-const int fireThreshold = 512;
+const int fireThreshold = 300;
 const int trigPin = 11;
 const int echoPin = 10;
-const int pwm = 75;
+const int pwm = 65;
 
 char received;
 int prevFallState = 0;

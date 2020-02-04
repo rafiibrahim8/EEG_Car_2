@@ -8,8 +8,8 @@ android {
         applicationId "ml.nerdsofku.eegcarx2"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.compileSdkVersion
-        versionCode 5
-        versionName "1.50"
+        versionCode 8
+        versionName "1.7"
     }
 
     buildTypes {
